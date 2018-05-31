@@ -18,5 +18,7 @@ public class Main {
 			System.out.println("다름");	
 			
 		}
+		
+		//이 부분은 이클립스에서 추가
 	}
 }
