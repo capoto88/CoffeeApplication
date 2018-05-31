@@ -18,5 +18,6 @@ public class Main {
 			System.out.println("다름");	
 			
 		}
+		//이문장은 github에서 수정
 	}
 }
