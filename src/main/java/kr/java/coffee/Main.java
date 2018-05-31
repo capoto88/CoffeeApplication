@@ -20,5 +20,6 @@ public class Main {
 		}
 		
 		//이 부분은 이클립스에서 추가
+		//이문장은 github에서 수정
 	}
 }
