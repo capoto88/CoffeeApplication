@@ -1,11 +1,14 @@
 package kr.java.coffee.dto;
 
-public class Sale {
-	private int no;
-	private Product product;
-	private int saleCnt;
-	private int marginRate;
+import kr.java.swinglibrary.component.ToArray;
 
+public class Sale implements ToArray{
+	private int no;
+	private Product product; // 제품
+	private int saleCnt; // 판매수량
+	private int marginRate; // 마진율
+	private SaleDetail saleDetail;
+	
 	public Sale() {
 	}
 
@@ -18,6 +21,14 @@ public class Sale {
 		this.product = product;
 		this.saleCnt = saleCnt;
 		this.marginRate = marginRate;
+	}
+
+	public Sale(int no, Product product, int saleCnt, int marginRate, SaleDetail saleDetail) {
+		this.no = no;
+		this.product = product;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
+		this.saleDetail = saleDetail;
 	}
 
 	public int getNo() {
@@ -52,43 +63,32 @@ public class Sale {
 		this.marginRate = marginRate;
 	}
 
+	public SaleDetail getSaleDetail() {
+		return saleDetail;
+	}
+
+	public void setSaleDetail(SaleDetail saleDetail) {
+		this.saleDetail = saleDetail;
+	}
+
 	@Override
 	public String toString() {
-		return String.format("Sale [%s, %s, %s, %s]", no, product, saleCnt, marginRate);
+		return String.format("Sale [%s, %s, %s, %s, %s]", no, product, saleCnt, marginRate, saleDetail);
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + marginRate;
-		result = prime * result + no;
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + saleCnt;
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Sale other = (Sale) obj;
-		if (marginRate != other.marginRate)
-			return false;
-		if (no != other.no)
-			return false;
-		if (product == null) {
-			if (other.product != null)
-				return false;
-		} else if (!product.equals(other.product))
-			return false;
-		if (saleCnt != other.saleCnt)
-			return false;
-		return true;
+	public Object[] toArray() {
+		if (saleDetail == null) {
+			return new Object[] { no, product.getCode(), saleCnt, marginRate+"%" };
+		}else {
+			return new Object[] { saleDetail.getRank(), product.getCode(), product.getName(), 
+					String.format("%,d", product.getPrice()), saleCnt, 
+					String.format("%,d", saleDetail.getSupplyPrice()), 
+					String.format("%,d", saleDetail.getAddTax()),
+					String.format("%,d", saleDetail.getSalePrice()), 
+					marginRate+"%", 
+					String.format("%,d", saleDetail.getMarginPrice()) };
+		}
 	}
 
 }
