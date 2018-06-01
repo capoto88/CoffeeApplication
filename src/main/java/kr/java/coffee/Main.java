@@ -1,25 +1,21 @@
 package kr.java.coffee;
 
-import kr.java.coffee.dto.Product;
+import java.awt.EventQueue;
+
+import kr.java.coffee.ui.CoffeeManager;
 
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("마칩시다... 강사님~");
-		Product p1 = new Product("A001");
-		Product p2 = new Product("A001");
-
-		System.out.println(p1);
-		System.out.println(p2);
-		
-		if (p1.equals(p2)) {
-			System.out.println("같음");			
-		}else {
-			System.out.println("다름");	
-			
-		}
-		
-		//이 부분은 이클립스에서 추가
-		//이문장은 github에서 수정
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CoffeeManager frame = new CoffeeManager();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }
